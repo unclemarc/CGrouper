@@ -12,7 +12,7 @@ Right now, cgroups version 1 (default through RHEL 8)
 Role Variables
 --------------
 
-This role takes the variable cgrouper_limits with dictionaries. To remove an existing limit, add the del paramter with the value "true"
+This role takes the variable cgrouper_limits with dictionaries. 
 
 Possible values for each dictionary entry are:
 ```
@@ -25,7 +25,7 @@ mem_max (no default) - maximum memory in megabytes
 Example Playbook
 ----------------
 
-This playbook will set up the cgroup configs for all web servers so the Apache gets 4 times the processoer time of other daemons when the system is under load. It will also cap the mandatory malware scanner to 10% of a single CPU and will stop RAM Hog 2018 from using more than 512 MB
+This playbook will set up the cgroup configs for all web servers so the Apache gets 4 times the processoer time of other daemons when the system is under load. It will also cap the mandatory malware scanner to 10% of a single CPU and will stop RAM Hog 2018 from using more than 512 MB. It will then 
 
 ```yml
 - name: Apache is important

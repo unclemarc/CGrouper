@@ -1,2 +1,7 @@
 ---
 # handlers file for CGrouper
+
+- name: reload config
+    systemd:
+      daemon_reload: yes
+
