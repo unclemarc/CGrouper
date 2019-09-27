@@ -1,4 +1,20 @@
 ---
 # tasks file for CGrouper
 
+- name: Update CPUShares if needed
+  become: yes
+  command: systemctl set-property {{cgrouper_limit.sname}} CPUShares={{cgrouper_limits.CPUShares}}
+  when: cgrouper_limits.CPUShares > 0 
+
+
+- name: Update CPUQuota if needed
+  become: yes
+  command: systemctl set-property {{cgrouper_limit.sname}} CPUQuota={{cgrouper_limits.CPUQuota}}%
+  when: cgrouper_limits.CPUQuota > 0
+
+
+- name: Update MemoryLimit if needed
+  become: yes
+  command: systemctl set-property {{cgrouper_limit.sname}} MemoryLimit={{cgrouper_limits.MemoryLimit}}
+  when: cgrouper_limits.MemoryLimit > 0
 

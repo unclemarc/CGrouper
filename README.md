@@ -17,9 +17,9 @@ This role takes the variable cgrouper_limits with dictionaries.
 Possible values for each dictionary entry are:
 ```
 sname (no default) - name of the service, such as httpd. You need this one
-cpu_shares (default 1024) - controls balance of 
-cpu_max (no default) - maximum cpu time. tranlates to "cpu_quota". 100 is 100% of a single core, can be higher (250% for instance is 2 and a half cores. Which is a terrible sitcom)
-mem_max (no default) - maximum memory in megabytes
+CPUShares (default 1024) - controls balance of 
+CPUQuota (no default) - maximum cpu time. tranlates to "cpu_quota". 100 is 100% of a single core, can be higher (250% for instance is 2 and a half cores. Which is a terrible sitcom)
+MemoryLimit (no default) - maximum memory in megabytes
 ```
 
 Example Playbook
@@ -32,9 +32,9 @@ This playbook will set up the cgroup configs for all web servers so the Apache g
    hosts: web
    vars:
      cgrouper_limits:
-       - { sname: httpd, cpu_shares: 4096 }
-       - { sname: mscan, cpu_max: 10 } 
-       - { sname: ramhogd, mem_max: 512 }
+       - { sname: httpd, CPUShares: 4096 }
+       - { sname: mscan, CPUQuota: 10 } 
+       - { sname: ramhogd, MemoryLimit: 512 }
    roles:
      - CGrouper
 ```
