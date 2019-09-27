@@ -12,21 +12,22 @@ Right now, cgroups version 1 (default through RHEL 8)
 Role Variables
 --------------
 
-This role takes the variable cgrouper_limits with dictionaries. To remove an existing lomit, add the del paramter with the value "true"
+This role takes the variable cgrouper_limits with dictionaries. To remove an existing limit, add the del paramter with the value "true"
 
 Possible values for each dictionary entry are:
-
+```
 sname (no default) - name of the service, such as httpd. You need this one
 cpu_shares (default 1024) - controls balance of 
 cpu_max (no default) - maximum cpu time. tranlates to "cpu_quota". 100 is 100% of a single core, can be higher (250% for instance is 2 and a half cores. Which is a terrible sitcom)
 mem_max (no default) - maximum memory in megabytes
+```
 
 Example Playbook
 ----------------
 
 This playbook will set up the cgroup configs for all web servers so the Apache gets 4 times the processoer time of other daemons when the system is under load. It will also cap the mandatory malware scanner to 10% of a single CPU and will stop RAM Hog 2018 from using more than 512 MB
 
-
+```yml
 - name: Apache is important
    hosts: web
    vars:
@@ -36,6 +37,7 @@ This playbook will set up the cgroup configs for all web servers so the Apache g
        - { sname: ramhogd, mem_max: 512 }
    roles:
      - CGrouper
+```
 
 License
 -------
