@@ -1,8 +1,6 @@
 ---
 # tasks file for CGrouper
-
 - name: execute systemctl set-property for each setting
   command: "systemctl set-property {{ item.service }}  {{ item.setting }}={{ item.value }}"
   become: yes
   with_items: "{{ cgrouper_limits }}"
-
