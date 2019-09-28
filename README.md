@@ -12,14 +12,15 @@ Right now, cgroups version 1 (default through RHEL 8)
 Role Variables
 --------------
 
-This role takes the variable cgrouper_limits with dictionaries. 
+This role takes the variable cgrouper_limits as a list.
 
-Possible values for each dictionary entry are:
+Possible values for each list entry are:
 ```
-sname (no default) - name of the service, such as httpd. You need this one
-CPUShares (default 1024) - controls balance of 
-CPUQuota (no default) - maximum cpu time. tranlates to "cpu_quota". 100 is 100% of a single core, can be higher (250% for instance is 2 and a half cores. Which is a terrible sitcom)
-MemoryLimit (no default) - maximum memory in megabytes
+cgservice (no default) - name of the service, such as httpd. You need this one
+cgsetting - the actual cgroup setting we're changing. Currently three are supported
+   - CPUShares - This controls the balance of processer time against other services when the system is under load. Default value on RHEL/Fedora is 1024 
+   - CPUQuota - maximum cpu time. tranlates to "cpu_quota". 100% is 100% of a single core, can be higher (250% for instance is 2 and a half cores. Which is a terrible sitcom). Setting ends with a percent sign, do not forget to use it
+   - MemoryLimit - maximum memory the service can cosume. End with M for megabytes and G for gigabytes
 ```
 
 Example Playbook
@@ -32,9 +33,15 @@ This playbook will set up the cgroup configs for all web servers so the Apache g
    hosts: web
    vars:
      cgrouper_limits:
-       - { sname: httpd, CPUShares: 4096 }
-       - { sname: mscan, CPUQuota: 10 } 
-       - { sname: ramhogd, MemoryLimit: 512 }
+       - cgservice: httpd
+         cgsetting: CPUShares
+         cgvalue: 2048
+       - cgservice: mscan
+         cgsetting: CPUQuota
+         cgvalue: 10% 
+       - cgservice: ramhogd
+         cgsetting: MemoryLimit
+         cgvalue: 512M
    roles:
      - CGrouper
 ```
