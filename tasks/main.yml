@@ -1,9 +1,8 @@
 ---
 # tasks file for CGrouper
-- name: sanity check if data passed
-  debug:
-    msg: "{{ item.cgservice }} {{ item.cgsetting }} {{ item.cgvalue }}"
+
+- name: execute systemctl set-property for each setting
+  command: "systemctl set-property {{ item.service }}  {{ item.setting }}={{ item.value }}"
+  become: yes
   with_items: "{{ cgrouper_limits }}"
-
-
 
