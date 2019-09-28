@@ -33,7 +33,7 @@ value - the setting for the cgroup. Note that CPUQuota MUST be expressed with a 
 Example Playbook
 ----------------
 
-This playbook will set up the cgroup configs for all web servers so the Apache gets 4 times the processoer time of other daemons when the system is under load. It will also cap the mandatory malware scanner to 10% of a single CPU and will stop RAM Hog 2018 from using more than 512 MB. It will then 
+This playbook will set up the cgroup configs for all web servers so the Apache gets 4 times the processoer time of other daemons when the system is under load. It will also cap the mandatory malware scanner to 10% of a single CPU and will stop RAM Hog 2018 from using more than 512 MB.  
 
 ```yml
 - name: Apache is important
