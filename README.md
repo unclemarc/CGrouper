@@ -3,6 +3,10 @@ CGrouper
 
 CGrouper provides tools to manage cgroup cpu and memory settings for multiple services across fleets of servers.
 
+It's funny because right now, the systemd module does not allow one to execute the "set-property" sub command, which would let you just do this type of stuff with that module. Anyway, I think I've put a pretty cool spin on it, so enjoy!
+
+Total Ansible n00b, so feel free to modify or send me a PR to update.
+
 Requirements
 ------------
 
